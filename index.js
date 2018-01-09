@@ -35,11 +35,11 @@ module.exports = function(options) {
             if(match && match[1]){
                 htmlPath = path.join(dir, match[1]);
             } else if(match) {
-                htmlPath = path.join(dir, file.basename.replace(file.extname, '.html'));
+                const __file = !(file instanceof File) ? new File(file) : file;
+                htmlPath = path.join(dir, __file.basename.replace(__file.extname, '.html'));
             } else{
                 self.push(file);
                 callback();
-                
                 return;
             }
 
